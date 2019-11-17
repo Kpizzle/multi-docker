@@ -13,3 +13,10 @@ after_success:
   - docker build -t kpizzle/multi-nginx ./nginx
   - docker build -t kpizzle/multi-server ./server
   - docker build -t kpizzle/multi-worker ./worker
+  # login into docker via the CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push created images to docker hub
+  - docker push kpizzle/multi-client
+  - docker push kpizzle/multi-nginx
+  - docker push kpizzle/multi-server
+  - docker push kpizzle/multi-worker
